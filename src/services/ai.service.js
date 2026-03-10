@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 
 const client = new OpenAI({  // ✅ Changed 'openai' → 'client'
-  apiKey: process.env.GROQ_API_KEY,        
+  apiKey: process.env.OPENAI_API_KEY,        
   baseURL: 'https://api.groq.com/openai/v1' 
 });
 
@@ -42,7 +42,7 @@ async function extractSkillsFromResume(text) {
   try {
     const prompt = `Extract a list of technical skills from the following resume text. Return as a JSON array of strings: ["skill1", "skill2"].\n\nResume text:\n${text}`;
     const resp = await client.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: 'llama-3.1-8b-instant',
       messages: [{ role: 'user', content: prompt }],
       temperature: 0
     });
